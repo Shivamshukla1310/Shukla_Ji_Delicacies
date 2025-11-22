@@ -1,13 +1,17 @@
 const express = require("express")
 const app = express()
 const dotenv = require("dotenv").config()
+const connectDb = require("./config/connectionDb")
 
-const PORT = process.env.PORT || 3000 // If port is not available we will see 3000
+const PORT = process.env.PORT || 3000
 
-app.get("/", (req, res) => {
-  res.json({ message: "Hello Ji Shukla Ji Here..." })
-})
+connectDb()
 
-app.listen(PORT, (err) => {
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
+app.use("/recipe", require("./routes/recipe"))
+
+app.listen(PORT, () => {
   console.log(`App is listening at ${PORT}`)
 })
