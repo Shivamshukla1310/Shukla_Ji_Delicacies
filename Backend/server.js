@@ -16,7 +16,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Serve static files
-app.use("/images", express.static(path.join(__dirname, "public", "images")));
+app.use("/images", express.static(path.join(__dirname, "public/images")));
+
 
 // ROUTES (VERY IMPORTANT ORDER!)
 app.use("/user", require("./routes/user"));

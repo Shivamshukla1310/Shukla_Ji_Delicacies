@@ -74,7 +74,8 @@ const addRecipe = async (req, res) => {
     // handle uploaded file if present
     if (req.file) {
       // store relative path or URL as you prefer
-      recipeData.coverImage = `/images/${req.file.filename}`;
+      recipeData.coverImage = req.file.filename;
+
     }
 
     // optional: attach createdBy if req.user is set (from auth middleware)
@@ -108,7 +109,8 @@ const editRecipe = async (req, res) => {
     }
 
     if (req.file) {
-      updates.coverImage = `/images/${req.file.filename}`;
+      updates.coverImage = req.file.filename;
+
     }
 
     const updated = await Recipes.findByIdAndUpdate(req.params.id, updates, { new: true });
